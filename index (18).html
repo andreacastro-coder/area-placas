@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Área de Placas · Industronic</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#1565c0;--marino:#1a237e;--claro:#e3f2fd;--gris:#757575;--borde:#e0e0e0;--fondo:#f5f5f5;--verde:#4caf50;--rojo:#d32f2f;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(180deg,var(--azul) 0,var(--azul) 40%,var(--claro) 40%,var(--claro) 100%);background-attachment:fixed;min-height:100vh;color:#333;display:flex;justify-content:center;padding:20px}
+.container{max-width:500px;width:100%}
+.aviso{background:#fff3cd;color:#856404;border-left:3px solid #ffc107;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;margin-bottom:14px}
+.header-main{background:#fff;padding:36px 24px 28px;text-align:center;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,.12);margin-bottom:20px}
+.header-main h1{color:var(--azul);font-size:28px;font-weight:800;margin-bottom:6px;letter-spacing:.5px}
+.header-main p{color:var(--gris);font-size:14px;font-weight:500}
+.logo-circle{width:80px;height:80px;background:var(--azul);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px;font-weight:700;color:#fff;letter-spacing:2px}
+.logo-circle .i-flip{display:inline-block;transform:rotate(180deg);margin-left:-2px}
+.content-white{background:#fff;padding:20px 0 24px;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,.12);overflow:hidden}
+.menu-grid{display:flex;flex-direction:column;gap:12px;padding:0 16px}
+.menu-card{background:#fff;border-radius:8px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid var(--borde);cursor:pointer;text-align:left;font-family:inherit;width:100%}
+.menu-card:active{transform:scale(.98)}
+.icon-box{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.icon-box.blue{background:var(--claro)}.icon-box.green{background:#e8f5e9}.icon-box.orange{background:#fff3e0}.icon-box.red{background:#ffebee}.icon-box.purple{background:#f3e5f5}
+.menu-card .text{flex:1}.menu-card h3{color:var(--marino);font-size:15px;font-weight:700;margin-bottom:2px}
+.menu-card p{color:var(--gris);font-size:12px}.menu-card .arrow{color:#bdbdbd;font-size:22px}
+.screen{display:none}.screen.active{display:block}
+.mod{background:#fff;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,.12);overflow:hidden}
+.header-inner{background:var(--marino);padding:14px 16px;display:flex;align-items:center;gap:12px;color:#fff}
+.header-inner h1{font-size:17px;font-weight:700;flex:1}
+.btn-back{background:rgba(255,255,255,.15);border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:18px;font-weight:600}
+.body{padding:16px}
+.section-t{color:var(--marino);font-size:14px;font-weight:700;margin:18px 0 10px;display:flex;justify-content:space-between;align-items:center}
+.section-t:first-child{margin-top:0}
+.contador{background:var(--claro);color:var(--azul);font-size:12px;padding:3px 10px;border-radius:12px}
+.contador.lleno{background:#ffebee;color:var(--rojo)}
+.input-group{margin-bottom:12px}
+.input-group label{display:block;color:#424242;font-size:13px;font-weight:600;margin-bottom:6px}
+.input-group label .req{color:var(--rojo)}
+.input-group input,.input-group select,.input-group textarea{width:100%;padding:12px 14px;border:1px solid var(--borde);border-radius:8px;font-size:15px;font-family:inherit;background:#fff;color:#333}
+.input-group textarea{min-height:70px;resize:vertical}
+.input-group input:focus,.input-group select:focus,.input-group textarea:focus{outline:none;border-color:var(--marino);box-shadow:0 0 0 3px rgba(26,35,126,.12)}
+.input-group .invalido{border-color:var(--rojo);background:#ffebee}
+.fecha-auto{background:var(--fondo);border-radius:8px;padding:12px 14px;font-size:14px;color:#424242;display:flex;justify-content:space-between}
+.fecha-auto span{color:var(--gris);font-size:12px}
+.nota-campo{color:var(--gris);font-size:12px;margin:-6px 0 12px}
+.nota-campo.invalido{color:var(--rojo);font-weight:600}
+.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:flex;background:#fff;border:1px solid var(--borde);border-radius:8px;padding:4px}
+.seg button{flex:1;padding:10px;border:none;background:transparent;border-radius:6px;font-weight:600;color:var(--gris);font-size:14px;font-family:inherit;cursor:pointer}
+.seg button.active{background:var(--marino);color:#fff}
+.seg.invalido{border-color:var(--rojo);background:#ffebee}
+.scan-box{border:2px dashed var(--borde);border-radius:8px;padding:14px;margin-bottom:12px}
+.scan-row{display:flex;gap:8px}
+.scan-row input{flex:1;min-width:0;padding:12px 14px;border:1px solid var(--borde);border-radius:8px;font-size:15px;font-family:inherit}
+.scan-row input:focus{outline:none;border-color:var(--marino)}
+.btn-cam{background:var(--marino);color:#fff;border:none;border-radius:8px;padding:0 16px;font-size:20px;cursor:pointer}
+.btn-cam:disabled,.scan-row input:disabled{opacity:.4}
+.scan-hint{color:var(--gris);font-size:12px;margin-top:8px}
+.scan-err.aviso-dup{color:#856404;background:#fff3cd;border-left:3px solid #ffc107;padding:8px 10px;border-radius:8px;font-weight:600}
+.scan-err{color:var(--rojo);font-size:13px;font-weight:600;margin-top:8px;display:none}
+.placa{border:1px solid var(--borde);border-radius:8px;padding:12px;margin-bottom:8px;display:grid;grid-template-columns:28px 1fr 84px 34px;gap:10px;align-items:center}
+.placa .n{width:28px;height:28px;border-radius:50%;background:var(--claro);color:var(--azul);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.placa .cod{color:var(--marino);font-weight:800;font-size:16px}
+.placa .des{color:var(--gris);font-size:11px;line-height:1.35;margin-top:2px}
+.placa input{width:100%;padding:10px 6px;border:1px solid var(--borde);border-radius:8px;font-size:16px;font-weight:700;text-align:center;font-family:inherit}
+.placa input.invalido{border-color:var(--rojo);background:#ffebee}
+.btn-remove{background:#ffebee;color:var(--rojo);border:none;border-radius:6px;height:34px;font-size:16px;cursor:pointer}
+.empty-state{text-align:center;padding:18px 10px;color:#9e9e9e;font-size:13px}
+.total{display:flex;justify-content:space-between;font-size:13px;color:#424242;font-weight:600;padding:4px 2px 0}
+.filas{display:flex;flex-direction:column;gap:8px}
+.fila{border:1px solid var(--borde);border-radius:8px;padding:10px}
+.fila.ok{border-color:#c8e6c9;background:#fbfefb}
+.fila.mal{border-color:var(--rojo);background:#fff8f8}
+.fila-top{display:grid;grid-template-columns:26px 1fr 44px 80px;gap:8px;align-items:center}
+.fila .n{width:26px;height:26px;border-radius:50%;background:var(--claro);color:var(--azul);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.fila.ok .n{background:#e8f5e9;color:#2e7d32}
+.fila input{width:100%;min-width:0;padding:11px 10px;border:1px solid var(--borde);border-radius:8px;font-size:15px;font-family:inherit;background:#fff}
+.fila input:focus{outline:none;border-color:var(--marino);box-shadow:0 0 0 3px rgba(26,35,126,.12)}
+.fila input.code{font-weight:700;color:var(--marino)}
+.fila input.qty{text-align:center;font-weight:700}
+.fila input.ubic.invalido,.fila input.invalido{border-color:var(--rojo);background:#ffebee}
+.fila .cam{height:42px;background:var(--marino);color:#fff;border:none;border-radius:8px;font-size:18px;cursor:pointer}
+.fila .des{color:var(--gris);font-size:11px;line-height:1.35;margin:6px 0 0 34px}
+.fila input.ubic{margin-top:8px;font-size:13px;padding:9px 10px;width:calc(100% - 34px);margin-left:34px}
+.fila input.motivo{margin-top:8px;font-size:13px;padding:9px 10px;width:calc(100% - 34px);margin-left:34px}
+.fila .msg{color:var(--rojo);font-size:12px;font-weight:600;margin:6px 0 0 34px}
+.col-h{display:grid;grid-template-columns:26px 1fr 44px 80px;gap:8px;font-size:11px;color:var(--gris);font-weight:600;padding:0 11px 4px}
+.col-h span:last-child{text-align:center}
+.btn-primary{background:var(--marino);color:#fff;font-weight:700;padding:16px 24px;border-radius:12px;border:none;cursor:pointer;width:100%;font-size:16px;font-family:inherit;box-shadow:0 4px 12px rgba(26,35,126,.3);margin-top:18px}
+.btn-primary:active{transform:scale(.98);background:#0d1742}
+.btn-secondary{background:#fff;color:var(--marino);font-weight:600;padding:14px;border-radius:8px;border:1px solid var(--borde);cursor:pointer;width:100%;font-size:15px;font-family:inherit;margin-top:10px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.show{display:flex}
+.modal-c{background:#fff;border-radius:16px;padding:22px;max-width:420px;width:100%;max-height:85vh;overflow:auto}
+.modal-c h3{color:var(--marino);font-size:17px;margin-bottom:6px}
+.modal-c p{color:var(--gris);font-size:13px;margin-bottom:12px}
+.sim-list{display:flex;flex-direction:column;gap:6px}
+.sim-list button{text-align:left;background:var(--fondo);border:none;border-radius:8px;padding:10px 12px;font-family:inherit;cursor:pointer;font-size:12px;color:#424242}
+.sim-list b{color:var(--marino);font-size:14px;display:block}
+.ok-icon{width:64px;height:64px;border-radius:50%;background:#e8f5e9;color:#2e7d32;font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.folio{font-size:26px;font-weight:800;color:var(--marino);text-align:center;margin:4px 0 6px}
+.resumen{background:var(--fondo);border-radius:8px;padding:10px 12px;font-size:13px;color:#424242;margin:10px 0}
+.resumen div{display:flex;justify-content:space-between;padding:2px 0}
+.center{text-align:center}
+#reader{width:100%;border-radius:12px;overflow:hidden;background:#000;min-height:260px}
+#reader video{width:100%!important;object-fit:cover}
+.cam-c{max-width:460px}
+.err-c h3{color:var(--rojo)}
+.err-box{background:#ffebee;color:#c62828;border-radius:8px;padding:10px 12px;font-size:14px;font-weight:600;margin:10px 0}
+.carga{position:fixed;inset:0;background:rgba(255,255,255,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:20;font-weight:600;color:var(--marino);padding:20px;text-align:center}
+.carga.oculto{display:none}
+.spin{width:36px;height:36px;border:4px solid var(--claro);border-top-color:var(--azul);border-radius:50%;animation:g 0.9s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.btn-primary:disabled{opacity:.6}
+.pie{text-align:center;color:var(--gris);font-size:11px;margin-top:14px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+ <div class="screen active" id="home">
+  <div class="header-main">
+   <div class="logo-circle">i<span class="i-flip">i</span></div>
+   <h1>Área de Placas</h1>
+   <p>Selecciona el movimiento</p>
+  </div>
+  <div class="content-white">
+   <div class="menu-grid">
+    <button class="menu-card" onclick="abrir('entrega')"><div class="icon-box blue">📦</div><div class="text"><h3>Entrega de placas</h3><p>Surtido a OF / OPI</p></div><span class="arrow">›</span></button>
+    <button class="menu-card" onclick="abrir('traslado')"><div class="icon-box orange">🔄</div><div class="text"><h3>Traslados</h3><p>Por solicitud de traslado</p></div><span class="arrow">›</span></button>
+    <button class="menu-card" onclick="abrir('recibo')"><div class="icon-box green">🚚</div><div class="text"><h3>Recibo de proveedor</h3><p>Entrada de placas</p></div><span class="arrow">›</span></button>
+    <button class="menu-card" onclick="abrir('rechazo')"><div class="icon-box red">⛔</div><div class="text"><h3>Rechazo de calidad</h3><p>Placas rechazadas al proveedor</p></div><span class="arrow">›</span></button>
+    <button class="menu-card" onclick="abrir('inventario')"><div class="icon-box purple">📋</div><div class="text"><h3>Inventario</h3><p>Conteo de placas por ubicación</p></div><span class="arrow">›</span></button>
+   </div>
+  </div>
+ <div class="pie">Área de Placas · v1.0</div>
+ </div>
+
+ <!-- ENTREGA -->
+ <div class="screen" id="entrega"><div class="mod">
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>📦 Entrega de placas</h1></div>
+  <div class="body">
+   <div class="section-t">Datos de la entrega</div>
+   <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
+   <div class="input-group"><label>Surte <span class="req">*</span></label><input data-req data-k="Surte" placeholder="Nombre de quien surte" autocapitalize="words"></div>
+   <div class="two-cols">
+    <div class="input-group"><label>OF</label><input data-unode="ofopi" data-k="OF" inputmode="numeric" placeholder="Ej. 12345"></div>
+    <div class="input-group"><label>OPI</label><input data-unode="ofopi" data-k="OPI" inputmode="numeric" placeholder="Ej. 889"></div>
+   </div>
+   <div class="nota-campo">Captura OF, OPI o ambas. Al menos una es obligatoria.</div>
+   <div class="input-group"><label>Cantidad OF</label><input data-k="Cantidad OF" type="number" min="1" inputmode="numeric" placeholder="Opcional"></div>
+   <div class="input-group"><label>Descripción <span class="req">*</span></label><input data-req data-k="Descripción" placeholder="Producto de la OF"></div>
+   <div class="input-group"><label>Quién recibe <span class="req">*</span></label><input data-req data-k="Quién recibe" placeholder="Nombre de quien recibe" autocapitalize="words"></div>
+   <div class="input-group"><label>Surtido <span class="req">*</span></label><div class="seg" data-req data-k="Surtido"><button type="button">Completo</button><button type="button">Parcial</button></div></div>
+   <div class="input-group"><label>Comentarios</label><textarea data-k="Comentarios" placeholder="Opcional"></textarea></div>
+   PLACAS
+  </div>
+ </div></div>
+
+ <!-- TRASLADOS -->
+ <div class="screen" id="traslado"><div class="mod">
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🔄 Traslados</h1></div>
+  <div class="body">
+   <div class="section-t">Datos del traslado</div>
+   <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
+   <div class="input-group"><label>Quién entrega <span class="req">*</span></label><input data-req data-k="Quién entrega" placeholder="Nombre de quien entrega" autocapitalize="words"></div>
+   <div class="two-cols">
+    <div class="input-group"><label>Solicitud de traslado <span class="req">*</span></label><input data-req data-k="Solicitud" inputmode="numeric" placeholder="Ej. 4521"></div>
+    <div class="input-group"><label>OPI <span class="req">*</span></label><input data-req data-k="OPI" inputmode="numeric" placeholder="Ej. 889"></div>
+   </div>
+   <div class="input-group"><label>Quién recibe <span class="req">*</span></label><input data-req data-k="Quién recibe" placeholder="Nombre de quien recibe" autocapitalize="words"></div>
+   <div class="input-group"><label>Parcialidad <span class="req">*</span></label><div class="seg" data-req data-k="Parcialidad"><button type="button">Completo</button><button type="button">Parcial</button></div></div>
+   <div class="input-group"><label>Comentario</label><textarea data-k="Comentario" placeholder="Opcional"></textarea></div>
+   PLACAS
+  </div>
+ </div></div>
+
+ <!-- RECIBO -->
+ <div class="screen" id="recibo"><div class="mod">
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🚚 Recibo de proveedor</h1></div>
+  <div class="body">
+   <div class="section-t">Datos del recibo</div>
+   <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
+   <div class="input-group"><label>Proveedor <span class="req">*</span></label><input data-req data-k="Proveedor" placeholder="Nombre del proveedor"></div>
+   PLACAS
+  </div>
+ </div></div>
+
+ <!-- RECHAZO -->
+ <div class="screen" id="rechazo"><div class="mod">
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>⛔ Rechazo de calidad</h1></div>
+  <div class="body">
+   <div class="section-t">Datos del rechazo</div>
+   <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
+   <div class="input-group"><label>Proveedor <span class="req">*</span></label><input data-req data-k="Proveedor" placeholder="Nombre del proveedor"></div>
+   <div class="input-group"><label>Folio <span class="req">*</span></label><input data-req data-k="Folio" placeholder="Folio de referencia"></div>
+   <div class="input-group"><label>Quién entrega <span class="req">*</span></label><input data-req data-k="Quién entrega" placeholder="Nombre de quien entrega" autocapitalize="words"></div>
+   <div class="input-group"><label>Quién recibe <span class="req">*</span></label><input data-req data-k="Quién recibe" placeholder="Nombre de quien recibe" autocapitalize="words"></div>
+   <div class="input-group"><label>Motivo de rechazo <span class="req">*</span></label><textarea data-req data-k="Motivo" placeholder="Describe el motivo general del rechazo"></textarea></div>
+   PLACAS
+  </div>
+ </div></div>
+
+ <!-- INVENTARIO -->
+ <div class="screen" id="inventario"><div class="mod">
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>📋 Inventario</h1></div>
+  <div class="body">
+   <div class="section-t">Datos del conteo</div>
+   <div class="input-group"><label>Fecha de registro</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
+   <div class="input-group"><label>Quién captura <span class="req">*</span></label><input data-req data-k="Quién captura" placeholder="Nombre de quien captura" autocapitalize="words"></div>
+   PLACAS
+  </div>
+ </div></div>
+</div>
+
+<div class="modal" id="m-cam"><div class="modal-c cam-c">
+ <h3>📷 Escanear placa</h3>
+ <p>Apunta la cámara al código QR de la placa.</p>
+ <div id="reader"></div>
+ <button class="btn-secondary" onclick="cerrarCamara()">Cancelar</button>
+</div></div>
+
+<div class="modal" id="m-err"><div class="modal-c err-c center">
+ <h3>No se guardó el registro</h3>
+ <div class="err-box" id="err-msg"></div>
+ <p>Tu captura sigue en pantalla. Corrige lo indicado o revisa tu conexión y vuelve a tocar Guardar.</p>
+ <button class="btn-primary" onclick="cerrar('m-err')">Entendido</button>
+</div></div>
+
+<div class="carga" id="carga"><div class="spin"></div><div id="carga-txt">Cargando catálogo de placas…</div><button class="btn-secondary" id="carga-retry" style="display:none;max-width:240px" onclick="cargarCatalogo()">Reintentar</button></div>
+
+<div class="modal" id="m-ok"><div class="modal-c center">
+ <div class="ok-icon">✓</div>
+ <h3>Registro guardado</h3>
+ <div class="folio" id="ok-folio"></div>
+ <p>Guardado en la base de datos.</p>
+ <div class="resumen" id="ok-res"></div>
+ <button class="btn-primary" onclick="nuevo()">Capturar otro</button>
+ <button class="btn-secondary" onclick="cerrar('m-ok');inicio()">Ir al inicio</button>
+</div></div>
+
+<script>
+// ⬇️ Pega aquí la URL de tu implementación de Apps Script (termina en /exec)
+const SCRIPT_URL = 'PEGA_AQUI_LA_URL_DEL_SCRIPT';
+let CAT = {};
+const MAX = 10;
+const PREF = {entrega:'ENT',traslado:'TRA',recibo:'REC',rechazo:'RCH',inventario:'INV'};
+const PLACAS_HTML = `
+ <div class="section-t">Placas <span class="contador">0 de 10</span></div>
+ <div class="col-h"><span>#</span><span>Placa (escanear)</span><span></span><span>Cantidad</span></div>
+ <div class="filas"></div>
+ <div class="total"><span>Total de piezas</span><span class="tot">0</span></div>
+ <div class="scan-err"></div>
+ <button class="btn-primary guardar" type="button">Guardar registro</button>`;
+let actual = null, consec = 120;
+
+document.querySelectorAll('.body').forEach(b=>{ b.innerHTML = b.innerHTML.replace('PLACAS', PLACAS_HTML); });
+document.querySelectorAll('.seg').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{g.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');g.classList.remove('invalido');}));
+document.querySelectorAll('[data-unode]').forEach(e=>e.addEventListener('input',()=>{const sc=e.closest('.screen');sc.querySelectorAll('[data-unode]').forEach(x=>x.classList.remove('invalido'));sc.querySelector('.nota-campo').classList.remove('invalido');}));
+document.querySelectorAll('[data-req]').forEach(e=>{e.addEventListener('input',()=>e.classList.remove('invalido'));e.addEventListener('change',()=>e.classList.remove('invalido'));});
+
+function reloj(){const d=new Date();const t=d.toLocaleDateString('es-MX',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});document.querySelectorAll('.reloj').forEach(e=>e.textContent=t);}
+reloj(); setInterval(reloj,30000);
+
+function scr(){return document.getElementById(actual);}
+function abrir(m){actual=m;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));scr().classList.add('active');scrollTo(0,0);}
+function inicio(){actual=null;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('home').classList.add('active');scrollTo(0,0);}
+function cerrar(id){document.getElementById(id).classList.remove('show');}
+
+function err(msg){const e=scr().querySelector('.scan-err');e.className='scan-err';e.textContent=msg;e.style.display=msg?'block':'none';}
+let camFila=null;
+function filasHTML(tipo){return Array.from({length:MAX},(_,i)=>`
+ <div class="fila" data-i="${i}">
+  <div class="fila-top">
+   <div class="n">${i+1}</div>
+   <input class="code" placeholder="Placa ${i+1}" autocomplete="off" enterkeyhint="next">
+   <button class="cam" type="button" title="Escanear con cámara">📷</button>
+   <input class="qty" type="number" min="1" inputmode="numeric" placeholder="0" enterkeyhint="next">
+  </div>
+  <div class="des" style="display:none"></div><div class="msg" style="display:none"></div>
+ ${tipo==='motivo'?`<input class="motivo" placeholder="Motivo de la placa ${i+1} (opcional)" autocomplete="off">`:''}${tipo==='ubic'?`<input class="ubic" placeholder="Ubicación de la placa ${i+1}" autocomplete="off">`:''}
+ </div>`).join('');}
+function initFilas(sc){
+ const box=sc.querySelector('.filas'); box.innerHTML=filasHTML(sc.id==='rechazo'?'motivo':sc.id==='inventario'?'ubic':'');
+ box.querySelectorAll('.fila').forEach(f=>{
+  const c=f.querySelector('.code'), q=f.querySelector('.qty'), i=+f.dataset.i;
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();resolver(f);if(f.classList.contains('ok'))q.focus();}});
+  c.addEventListener('blur',()=>resolver(f));
+  c.addEventListener('input',()=>{f.classList.remove('ok','mal');f.querySelector('.des').style.display='none';f.querySelector('.msg').style.display='none';c.classList.remove('invalido');contar(sc);});
+  q.addEventListener('input',()=>{q.classList.remove('invalido');contar(sc);});
+  const u=f.querySelector('.ubic'); const sig=()=>{const n=box.querySelector(`.fila[data-i="${i+1}"] .code`);n?n.focus():document.activeElement.blur();};
+  q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();u?u.focus():sig();}});
+  if(u){u.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sig();}});u.addEventListener('input',()=>u.classList.remove('invalido'));}
+  f.querySelector('.cam').onclick=()=>abrirCamara(f);
+ });
+ contar(sc);
+}
+let lector=null;
+function abrirCamara(f){
+ camFila=f; document.getElementById('m-cam').classList.add('show');
+ lector=new Html5Qrcode('reader');
+ lector.start({facingMode:'environment'},{fps:10,qrbox:{width:230,height:230}},
+  txt=>{cerrarCamara(); const c=camFila.querySelector('.code'); c.value=txt; resolver(camFila);
+        if(camFila.classList.contains('ok')) camFila.querySelector('.qty').focus();},
+  ()=>{}).catch(e=>{
+   cerrarCamara();
+   let m='No se pudo abrir la cámara. ';
+   if(e&&String(e).includes('NotAllowed')) m+='Permite el acceso a la cámara en la configuración del navegador y recarga la página.';
+   else m+='Puedes escribir el código o usar la pistola lectora.';
+   mostrarError(m);
+  });
+}
+function cerrarCamara(){
+ document.getElementById('m-cam').classList.remove('show');
+ if(lector){const l=lector; lector=null; l.stop().catch(()=>{}).finally(()=>{try{l.clear();}catch(_){}});}
+}
+function resolver(f){
+ const c=f.querySelector('.code'), d=f.querySelector('.des'), m=f.querySelector('.msg'), sc=f.closest('.screen');
+ const code=c.value.trim().split(/\s+/)[0]||'';
+ f.classList.remove('ok','mal'); d.style.display=m.style.display='none'; c.classList.remove('invalido');
+ if(!code){contar(sc);return;}
+ c.value=code;
+ const msg=t=>{f.classList.add('mal');c.classList.add('invalido');m.textContent=t;m.style.display='block';contar(sc);};
+ if(!CAT[code]) return msg(`${code} no está en el catálogo de placas.`);
+ const dup=sc.id==='inventario'?null:[...sc.querySelectorAll('.fila')].find(o=>o!==f&&o.querySelector('.code').value.trim()===code);
+ if(dup) return msg(`${code} ya está en la placa ${+dup.dataset.i+1}. Suma la cantidad ahí.`);
+ f.classList.add('ok'); d.textContent=CAT[code]; d.style.display='block'; contar(sc);
+}
+function contar(sc){
+ const ok=[...sc.querySelectorAll('.fila.ok')];
+ sc.querySelector('.contador').textContent=`${ok.length} de ${MAX}`;
+ sc.querySelector('.tot').textContent=ok.reduce((a,f)=>a+(+f.querySelector('.qty').value||0),0);
+}
+document.querySelectorAll('.screen:not(#home)').forEach(initFilas);
+document.querySelectorAll('.guardar').forEach(b=>b.onclick=()=>{
+ const sc=scr(); let ok=true, primero=null; const marca=e=>{ok=false;primero=primero||e;};
+ err('');
+ sc.querySelectorAll('[data-req]').forEach(e=>{
+  const v=e.classList.contains('seg')?e.querySelector('.active'):e.value.trim();
+  if(!v){e.classList.add('invalido');marca(e);}
+ });
+ const uno=[...sc.querySelectorAll('[data-unode]')];
+ if(uno.length&&!uno.some(e=>e.value.trim())){uno.forEach(e=>e.classList.add('invalido'));sc.querySelector('.nota-campo').classList.add('invalido');marca(uno[0]);}
+ const items=[];
+ sc.querySelectorAll('.fila').forEach(f=>{
+  const c=f.querySelector('.code'), q=f.querySelector('.qty'), tiene=c.value.trim(), cant=q.value.trim();
+  if(!tiene&&!cant) return;
+  if(!tiene){c.classList.add('invalido');marca(c);return;}
+  if(!f.classList.contains('ok')){marca(c);return;}
+  if(!(+cant>0)){q.classList.add('invalido');marca(q);return;}
+  const ub=f.querySelector('.ubic'); if(ub&&!ub.value.trim()){ub.classList.add('invalido');marca(ub);return;}
+  const mo=f.querySelector('.motivo'); items.push({code:c.value.trim(),qty:+cant,mot:mo?mo.value.trim():(ub?ub.value.trim():'')});
+ });
+ if(ok&&actual==='inventario'){const vis={},rep=[];items.forEach(p=>{const key=p.code+'|'+p.mot.toUpperCase();if(vis[key])rep.push(`${p.code} en ${p.mot}`);vis[key]=1;});
+  const firma=rep.join(',');
+  if(rep.length&&sc.dataset.avisado!==firma){sc.dataset.avisado=firma;const e=sc.querySelector('.scan-err');e.innerHTML=`⚠️ Posible duplicado: ${rep.join(', ')} aparece en más de un renglón. Revisa, o toca <b>Guardar registro</b> otra vez para guardar así.`;e.className='scan-err aviso-dup';e.style.display='block';e.scrollIntoView({behavior:'smooth',block:'center'});return;}}
+ if(!items.length&&ok){err('Captura al menos una placa con su cantidad.');marca(sc.querySelector('.fila .code'));}
+ if(!ok){primero.scrollIntoView({behavior:'smooth',block:'center'});return;}
+ enviar(sc,b,items);
+});
+async function enviar(sc,btn,items){
+ const encabezado={};
+ sc.querySelectorAll('[data-k]').forEach(e=>{
+  encabezado[e.dataset.k]=e.classList.contains('seg')?((e.querySelector('.active')||{}).textContent||''):e.value.trim();
+ });
+ const placas=items.map(p=>({code:p.code,qty:p.qty,extra:p.mot}));
+ btn.disabled=true; const txt=btn.textContent; btn.textContent='Guardando…';
+ try{
+  const r=await fetch(SCRIPT_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},
+   body:JSON.stringify({modulo:actual,encabezado,placas})});
+  const j=await r.json();
+  if(!j.ok) throw new Error(j.error||'Error desconocido.');
+  document.getElementById('ok-folio').textContent=j.folio;
+  document.getElementById('ok-res').innerHTML=items.map(p=>`<div><span>${p.code}${p.mot?` · <i style="color:#757575">${esc(p.mot)}</i>`:''}</span><b>${p.qty}</b></div>`).join('')+
+   `<div style="border-top:1px solid #e0e0e0;margin-top:4px;padding-top:4px"><span>${items.length} placa(s)</span><b>${items.reduce((a,p)=>a+p.qty,0)} pzas</b></div>`+
+   (j.alertas?`<div style="color:#856404;font-weight:600">⚠️ ${j.alertas} renglón(es) con alerta de posible duplicado</div>`:'');
+  document.getElementById('m-ok').classList.add('show');
+ }catch(e){
+  mostrarError(e.message==='Failed to fetch'?'Sin conexión con la base de datos. Revisa tu internet e intenta de nuevo.':e.message);
+ }finally{btn.disabled=false; btn.textContent=txt;}
+}
+function mostrarError(m){document.getElementById('err-msg').textContent=m;document.getElementById('m-err').classList.add('show');}
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+async function cargarCatalogo(){
+ const c=document.getElementById('carga'),t=document.getElementById('carga-txt'),rb=document.getElementById('carga-retry');
+ c.classList.remove('oculto'); t.textContent='Cargando catálogo de placas…'; rb.style.display='none';
+ try{
+  const r=await fetch(SCRIPT_URL+'?accion=catalogo',{redirect:'follow'});
+  const j=await r.json();
+  if(!j.ok) throw new Error(j.error||'');
+  CAT=j.catalogo||{};
+  if(!Object.keys(CAT).length) throw new Error('El catálogo está vacío.');
+  c.classList.add('oculto');
+ }catch(e){
+  t.textContent='No se pudo cargar el catálogo. Revisa tu conexión. '+(e.message&&e.message!=='Failed to fetch'?e.message:'');
+  rb.style.display='block';
+ }
+}
+cargarCatalogo();
+function nuevo(){
+ cerrar('m-ok'); const s=scr();
+ s.querySelectorAll('input,textarea').forEach(e=>e.value=''); s.querySelectorAll('select').forEach(e=>e.value='');
+ s.querySelectorAll('.seg button').forEach(b=>b.classList.remove('active'));
+ err(''); delete s.dataset.avisado; initFilas(s); scrollTo(0,0);
+}
+</script>
+</body>
+</html>
