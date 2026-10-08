@@ -89,6 +89,39 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .fila .msg{color:var(--rojo);font-size:12px;font-weight:600;margin:6px 0 0 34px}
 .col-h{display:grid;grid-template-columns:26px 1fr 44px 80px;gap:8px;font-size:11px;color:var(--gris);font-weight:600;padding:0 11px 4px}
 .col-h span:last-child{text-align:center}
+.btn-reg{background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;white-space:nowrap}
+.banner-corr{display:none;background:#fff3e0;border-left:4px solid #ef6c00;color:#8a4b00;border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;margin-bottom:14px}
+.banner-corr.on{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.banner-corr button{background:#fff;border:1px solid #ef6c00;color:#ef6c00;border-radius:6px;padding:6px 10px;font-family:inherit;font-weight:600;cursor:pointer}
+.reg-c{max-width:500px}
+.chips{display:flex;gap:6px;margin:4px 0 12px}
+.chips button{flex:1;padding:9px;border:1px solid var(--borde);background:#fff;border-radius:8px;font-family:inherit;font-weight:600;color:var(--gris);cursor:pointer}
+.chips button.on{background:var(--marino);color:#fff;border-color:var(--marino)}
+.reg-list{display:flex;flex-direction:column;gap:10px}
+.reg{border:1px solid var(--borde);border-radius:10px;padding:12px}
+.reg.cancel{background:#fafafa;opacity:.75}
+.reg-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.reg-folio{font-weight:800;color:var(--marino);font-size:15px}
+.reg-hora{color:var(--gris);font-size:12px}
+.badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px}
+.badge.act{background:#e8f5e9;color:#2e7d32}.badge.can{background:#ffebee;color:#c62828}
+.reg-enc{color:#424242;font-size:12px;margin:6px 0;line-height:1.5}
+.reg-pl{font-size:13px;border-top:1px dashed var(--borde);padding-top:6px}
+.reg-pl div{display:flex;justify-content:space-between;padding:2px 0}
+.reg-pl i{color:var(--gris);font-style:normal;font-size:11px}
+.reg-can{color:#c62828;font-size:11px;margin-top:6px}
+.reg-acc{display:flex;gap:8px;margin-top:10px}
+.reg-acc button{flex:1;padding:9px;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;font-size:13px}
+.b-corr{background:var(--marino);color:#fff;border:none}
+.b-canc{background:#fff;color:#c62828;border:1px solid #ef9a9a}
+.q-c .input-group{text-align:left}
+.sug{display:none;margin:6px 0 0 34px;border:1px solid var(--borde);border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.sug.on{display:block}
+.sug button{display:block;width:100%;text-align:left;background:#fff;border:none;border-bottom:1px solid #f0f0f0;padding:8px 10px;font-family:inherit;cursor:pointer;font-size:11px;color:#616161;line-height:1.35}
+.sug button:last-child{border-bottom:none}
+.sug button b{color:var(--marino);font-size:14px;display:block}
+.sug button:active,.sug button:hover{background:var(--claro)}
+.fila .des.prev{color:var(--azul);font-style:italic}
 .btn-primary{background:var(--marino);color:#fff;font-weight:700;padding:16px 24px;border-radius:12px;border:none;cursor:pointer;width:100%;font-size:16px;font-family:inherit;box-shadow:0 4px 12px rgba(26,35,126,.3);margin-top:18px}
 .btn-primary:active{transform:scale(.98);background:#0d1742}
 .btn-secondary{background:#fff;color:var(--marino);font-weight:600;padding:14px;border-radius:8px;border:1px solid var(--borde);cursor:pointer;width:100%;font-size:15px;font-family:inherit;margin-top:10px}
@@ -138,13 +171,14 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
     <button class="menu-card" onclick="abrir('inventario')"><div class="icon-box purple">📋</div><div class="text"><h3>Inventario</h3><p>Conteo de placas por ubicación</p></div><span class="arrow">›</span></button>
    </div>
   </div>
- <div class="pie">Área de Placas · v1.0</div>
+ <div class="pie">Área de Placas · v2.1</div>
  </div>
 
  <!-- ENTREGA -->
  <div class="screen" id="entrega"><div class="mod">
-  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>📦 Entrega de placas</h1></div>
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>📦 Entrega de placas</h1><button class="btn-reg" onclick="abrirRegistros()" title="Registros recientes">📋 Registros</button></div>
   <div class="body">
+   <div class="banner-corr"></div>
    <div class="section-t">Datos de la entrega</div>
    <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
    <div class="input-group"><label>Surte <span class="req">*</span></label><input data-req data-k="Surte" placeholder="Nombre de quien surte" autocapitalize="words"></div>
@@ -164,8 +198,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 
  <!-- TRASLADOS -->
  <div class="screen" id="traslado"><div class="mod">
-  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🔄 Traslados</h1></div>
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🔄 Traslados</h1><button class="btn-reg" onclick="abrirRegistros()" title="Registros recientes">📋 Registros</button></div>
   <div class="body">
+   <div class="banner-corr"></div>
    <div class="section-t">Datos del traslado</div>
    <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
    <div class="input-group"><label>Quién entrega <span class="req">*</span></label><input data-req data-k="Quién entrega" placeholder="Nombre de quien entrega" autocapitalize="words"></div>
@@ -182,8 +217,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 
  <!-- RECIBO -->
  <div class="screen" id="recibo"><div class="mod">
-  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🚚 Recibo de proveedor</h1></div>
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🚚 Recibo de proveedor</h1><button class="btn-reg" onclick="abrirRegistros()" title="Registros recientes">📋 Registros</button></div>
   <div class="body">
+   <div class="banner-corr"></div>
    <div class="section-t">Datos del recibo</div>
    <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
    <div class="input-group"><label>Proveedor <span class="req">*</span></label><input data-req data-k="Proveedor" placeholder="Nombre del proveedor"></div>
@@ -193,8 +229,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 
  <!-- RECHAZO -->
  <div class="screen" id="rechazo"><div class="mod">
-  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>⛔ Rechazo de calidad</h1></div>
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>⛔ Rechazo de calidad</h1><button class="btn-reg" onclick="abrirRegistros()" title="Registros recientes">📋 Registros</button></div>
   <div class="body">
+   <div class="banner-corr"></div>
    <div class="section-t">Datos del rechazo</div>
    <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
    <div class="input-group"><label>Proveedor <span class="req">*</span></label><input data-req data-k="Proveedor" placeholder="Nombre del proveedor"></div>
@@ -208,8 +245,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 
  <!-- INVENTARIO -->
  <div class="screen" id="inventario"><div class="mod">
-  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>📋 Inventario</h1></div>
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>📋 Inventario</h1><button class="btn-reg" onclick="abrirRegistros()" title="Registros recientes">📋 Registros</button></div>
   <div class="body">
+   <div class="banner-corr"></div>
    <div class="section-t">Datos del conteo</div>
    <div class="input-group"><label>Fecha de registro</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
    <div class="input-group"><label>Quién captura <span class="req">*</span></label><input data-req data-k="Quién captura" placeholder="Nombre de quien captura" autocapitalize="words"></div>
@@ -232,16 +270,34 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
  <button class="btn-primary" onclick="cerrar('m-err')">Entendido</button>
 </div></div>
 
+<div class="modal" id="m-reg"><div class="modal-c reg-c">
+ <h3 id="reg-tit">📋 Registros</h3>
+ <p>Puedes corregir o cancelar registros de los últimos 3 días.</p>
+ <div class="chips"><button class="on" data-f="hoy">Hoy</button><button data-f="3d">Últimos 3 días</button></div>
+ <div class="reg-list" id="reg-list"></div>
+ <button class="btn-secondary" onclick="cerrar('m-reg')">Cerrar</button>
+</div></div>
+
+<div class="modal" id="m-quien"><div class="modal-c q-c">
+ <h3 id="q-tit">Confirmar</h3>
+ <p id="q-sub"></p>
+ <div class="input-group"><label>Tu nombre <span class="req">*</span></label><input id="q-nombre" placeholder="Quién hace el cambio" autocapitalize="words"></div>
+ <div class="input-group"><label>Motivo <span class="req">*</span></label><textarea id="q-motivo" placeholder="Ej. cantidad errónea, placa equivocada"></textarea></div>
+ <button class="btn-primary" id="q-ok">Confirmar</button>
+ <button class="btn-secondary" onclick="resolverQuien(null)">Regresar</button>
+</div></div>
+
 <div class="carga" id="carga"><div class="spin"></div><div id="carga-txt">Cargando catálogo de placas…</div><button class="btn-secondary" id="carga-retry" style="display:none;max-width:240px" onclick="cargarCatalogo()">Reintentar</button></div>
 
 <div class="modal" id="m-ok"><div class="modal-c center">
  <div class="ok-icon">✓</div>
  <h3>Registro guardado</h3>
  <div class="folio" id="ok-folio"></div>
+ <p id="ok-reemp" style="color:#ef6c00;font-weight:600"></p>
  <p>Guardado en la base de datos.</p>
  <div class="resumen" id="ok-res"></div>
  <button class="btn-primary" onclick="nuevo()">Capturar otro</button>
- <button class="btn-secondary" onclick="cerrar('m-ok');inicio()">Ir al inicio</button>
+ <button class="btn-secondary" onclick="nuevo();inicio()">Ir al inicio</button>
 </div></div>
 
 <script>
@@ -269,7 +325,7 @@ reloj(); setInterval(reloj,30000);
 
 function scr(){return document.getElementById(actual);}
 function abrir(m){actual=m;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));scr().classList.add('active');scrollTo(0,0);}
-function inicio(){actual=null;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('home').classList.add('active');scrollTo(0,0);}
+function inicio(){if(actual)salirCorreccion(scr(),true);actual=null;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('home').classList.add('active');scrollTo(0,0);}
 function cerrar(id){document.getElementById(id).classList.remove('show');}
 
 function err(msg){const e=scr().querySelector('.scan-err');e.className='scan-err';e.textContent=msg;e.style.display=msg?'block':'none';}
@@ -278,10 +334,11 @@ function filasHTML(tipo){return Array.from({length:MAX},(_,i)=>`
  <div class="fila" data-i="${i}">
   <div class="fila-top">
    <div class="n">${i+1}</div>
-   <input class="code" placeholder="Placa ${i+1}" autocomplete="off" enterkeyhint="next">
+   <input class="code" placeholder="Código o modelo" autocomplete="off" enterkeyhint="next">
    <button class="cam" type="button" title="Escanear con cámara">📷</button>
    <input class="qty" type="number" min="1" inputmode="numeric" placeholder="0" enterkeyhint="next">
   </div>
+  <div class="sug"></div>
   <div class="des" style="display:none"></div><div class="msg" style="display:none"></div>
  ${tipo==='motivo'?`<input class="motivo" placeholder="Motivo de la placa ${i+1} (opcional)" autocomplete="off">`:''}${tipo==='ubic'?`<input class="ubic" placeholder="Ubicación de la placa ${i+1}" autocomplete="off">`:''}
  </div>`).join('');}
@@ -289,9 +346,13 @@ function initFilas(sc){
  const box=sc.querySelector('.filas'); box.innerHTML=filasHTML(sc.id==='rechazo'?'motivo':sc.id==='inventario'?'ubic':'');
  box.querySelectorAll('.fila').forEach(f=>{
   const c=f.querySelector('.code'), q=f.querySelector('.qty'), i=+f.dataset.i;
-  c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();resolver(f);if(f.classList.contains('ok'))q.focus();}});
-  c.addEventListener('blur',()=>resolver(f));
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();
+    const sg=f.querySelector('.sug'), t=c.value.trim().split(/\s+/)[0];
+    if(sg.classList.contains('on')&&!CAT[t]){const b=sg.querySelector('button');if(b){elegir(f,b.dataset.c);return;}}
+    ocultarSug(f);resolver(f);if(f.classList.contains('ok'))q.focus();}});
+  c.addEventListener('blur',()=>{ocultarSug(f);resolver(f);});
   c.addEventListener('input',()=>{f.classList.remove('ok','mal');f.querySelector('.des').style.display='none';f.querySelector('.msg').style.display='none';c.classList.remove('invalido');contar(sc);});
+  c.addEventListener('input',()=>sugerir(f));
   q.addEventListener('input',()=>{q.classList.remove('invalido');contar(sc);});
   const u=f.querySelector('.ubic'); const sig=()=>{const n=box.querySelector(`.fila[data-i="${i+1}"] .code`);n?n.focus():document.activeElement.blur();};
   q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();u?u.focus():sig();}});
@@ -319,6 +380,24 @@ function cerrarCamara(){
  document.getElementById('m-cam').classList.remove('show');
  if(lector){const l=lector; lector=null; l.stop().catch(()=>{}).finally(()=>{try{l.clear();}catch(_){}});}
 }
+function ocultarSug(f){const sg=f.querySelector('.sug');sg.classList.remove('on');sg.innerHTML='';}
+function elegir(f,code){const c=f.querySelector('.code');c.value=code;ocultarSug(f);resolver(f);if(f.classList.contains('ok'))f.querySelector('.qty').focus();}
+function sugerir(f){
+ const c=f.querySelector('.code'), d=f.querySelector('.des'), sg=f.querySelector('.sug');
+ const v=c.value.trim();
+ d.classList.remove('prev');
+ if(!v||/\s/.test(c.value.replace(/^\s+/,''))&&/^\d{6}\s/.test(v)){ocultarSug(f);return;}   // lectura de QR/pistola: no sugerir
+ if(/^\d{6}$/.test(v)&&CAT[v]){ocultarSug(f);d.textContent=CAT[v];d.classList.add('prev');d.style.display='block';return;}
+ if(v.length<2){ocultarSug(f);return;}
+ let res;
+ if(/^\d+$/.test(v)) res=Object.keys(CAT).filter(k=>k.startsWith(v));
+ else{const tk=v.toUpperCase().split(/\s+/);res=Object.keys(CAT).filter(k=>{const t=(k+' '+CAT[k]).toUpperCase();return tk.every(x=>t.includes(x));});}
+ res=res.slice(0,8);
+ if(!res.length){ocultarSug(f);return;}
+ sg.innerHTML=res.map(k=>`<button type="button" data-c="${k}"><b>${k}</b>${esc(CAT[k])}</button>`).join('');
+ sg.querySelectorAll('button').forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>elegir(f,b.dataset.c);});
+ sg.classList.add('on');
+}
 function resolver(f){
  const c=f.querySelector('.code'), d=f.querySelector('.des'), m=f.querySelector('.msg'), sc=f.closest('.screen');
  const code=c.value.trim().split(/\s+/)[0]||'';
@@ -329,7 +408,7 @@ function resolver(f){
  if(!CAT[code]) return msg(`${code} no está en el catálogo de placas.`);
  const dup=sc.id==='inventario'?null:[...sc.querySelectorAll('.fila')].find(o=>o!==f&&o.querySelector('.code').value.trim()===code);
  if(dup) return msg(`${code} ya está en la placa ${+dup.dataset.i+1}. Suma la cantidad ahí.`);
- f.classList.add('ok'); d.textContent=CAT[code]; d.style.display='block'; contar(sc);
+ f.classList.add('ok'); d.classList.remove('prev'); d.textContent=CAT[code]; d.style.display='block'; contar(sc);
 }
 function contar(sc){
  const ok=[...sc.querySelectorAll('.fila.ok')];
@@ -364,6 +443,12 @@ document.querySelectorAll('.guardar').forEach(b=>b.onclick=()=>{
  enviar(sc,b,items);
 });
 async function enviar(sc,btn,items){
+ const corrige=sc.dataset.corrige||'';
+ let quien=null;
+ if(corrige){
+  quien=await pedirQuien('Guardar corrección',`Se cancelará ${corrige} y se creará un folio nuevo con estos datos.`);
+  if(!quien) return;
+ }
  const encabezado={};
  sc.querySelectorAll('[data-k]').forEach(e=>{
   encabezado[e.dataset.k]=e.classList.contains('seg')?((e.querySelector('.active')||{}).textContent||''):e.value.trim();
@@ -372,10 +457,11 @@ async function enviar(sc,btn,items){
  btn.disabled=true; const txt=btn.textContent; btn.textContent='Guardando…';
  try{
   const r=await fetch(SCRIPT_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},
-   body:JSON.stringify({modulo:actual,encabezado,placas})});
+   body:JSON.stringify(Object.assign({modulo:actual,encabezado,placas},corrige?{accion:'corregir',folio:corrige,quien:quien.nombre,motivo:quien.motivo}:{}))});
   const j=await r.json();
   if(!j.ok) throw new Error(j.error||'Error desconocido.');
   document.getElementById('ok-folio').textContent=j.folio;
+  document.getElementById('ok-reemp').textContent=j.reemplaza?`Reemplaza a ${j.reemplaza}, que quedó cancelado.`:'';
   document.getElementById('ok-res').innerHTML=items.map(p=>`<div><span>${p.code}${p.mot?` · <i style="color:#757575">${esc(p.mot)}</i>`:''}</span><b>${p.qty}</b></div>`).join('')+
    `<div style="border-top:1px solid #e0e0e0;margin-top:4px;padding-top:4px"><span>${items.length} placa(s)</span><b>${items.reduce((a,p)=>a+p.qty,0)} pzas</b></div>`+
    (j.alertas?`<div style="color:#856404;font-weight:600">⚠️ ${j.alertas} renglón(es) con alerta de posible duplicado</div>`:'');
@@ -402,8 +488,110 @@ async function cargarCatalogo(){
  }
 }
 cargarCatalogo();
+
+/* ---------- Registros recientes, corregir y cancelar ---------- */
+let REGS=[], filtroReg='hoy';
+const TIT={entrega:'Entregas',traslado:'Traslados',recibo:'Recibos',rechazo:'Rechazos',inventario:'Inventario'};
+document.querySelectorAll('#m-reg .chips button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('#m-reg .chips button').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroReg=b.dataset.f;pintarRegs();});
+async function abrirRegistros(){
+ document.getElementById('reg-tit').textContent='📋 '+TIT[actual]+' recientes';
+ const box=document.getElementById('reg-list');
+ box.innerHTML='<div class="empty-state">Cargando…</div>';
+ document.getElementById('m-reg').classList.add('show');
+ try{
+  const r=await fetch(SCRIPT_URL+'?accion=registros&modulo='+actual,{redirect:'follow'});
+  const j=await r.json(); if(!j.ok) throw new Error(j.error||'');
+  REGS=j.registros||[]; pintarRegs();
+ }catch(e){box.innerHTML='<div class="empty-state">No se pudieron cargar los registros. Revisa tu conexión.</div>';}
+}
+function pintarRegs(){
+ const box=document.getElementById('reg-list');
+ const l=REGS.filter(x=>filtroReg==='3d'||x.hoy);
+ if(!l.length){box.innerHTML='<div class="empty-state">Sin registros '+(filtroReg==='hoy'?'hoy':'en los últimos 3 días')+'.</div>';return;}
+ box.innerHTML=l.map((x,i)=>{
+  const can=x.estatus==='CANCELADO';
+  const enc=Object.entries(x.enc).filter(([k,v])=>v!=='').map(([k,v])=>`<b>${esc(k)}:</b> ${esc(v)}`).join(' · ');
+  const pl=x.placas.map(p=>`<div><span>${p.code}${p.extra?` <i>· ${esc(p.extra)}</i>`:''}</span><b>${p.qty}</b></div>`).join('');
+  return `<div class="reg${can?' cancel':''}">
+   <div class="reg-top"><span class="reg-folio">${x.folio}</span><span class="badge ${can?'can':'act'}">${can?'Cancelado':'Activo'}</span></div>
+   <div class="reg-hora">${x.fecha} · ${x.hora}</div>
+   <div class="reg-enc">${enc}</div>
+   <div class="reg-pl">${pl}</div>
+   ${can?`<div class="reg-can">${esc(x.cancelacion)}</div>`:`<div class="reg-acc"><button class="b-corr" onclick="corregir('${x.folio}')">✏️ Corregir</button><button class="b-canc" onclick="cancelarFolio('${x.folio}')">✕ Cancelar</button></div>`}
+  </div>`;}).join('');
+}
+let _qRes=null;
+function pedirQuien(tit,sub){
+ document.getElementById('q-tit').textContent=tit;
+ document.getElementById('q-sub').textContent=sub;
+ const n=document.getElementById('q-nombre'),m=document.getElementById('q-motivo');
+ try{n.value=localStorage.getItem('ap_nombre')||'';}catch(_){}
+ m.value=''; n.classList.remove('invalido'); m.classList.remove('invalido');
+ document.getElementById('m-quien').classList.add('show');
+ return new Promise(res=>{_qRes=res;});
+}
+function resolverQuien(v){document.getElementById('m-quien').classList.remove('show');if(_qRes){_qRes(v);_qRes=null;}}
+document.getElementById('q-ok').onclick=()=>{
+ const n=document.getElementById('q-nombre'),m=document.getElementById('q-motivo');
+ let ok=true; [n,m].forEach(e=>{if(!e.value.trim()){e.classList.add('invalido');ok=false;}else e.classList.remove('invalido');});
+ if(!ok) return;
+ try{localStorage.setItem('ap_nombre',n.value.trim());}catch(_){}
+ resolverQuien({nombre:n.value.trim(),motivo:m.value.trim()});
+};
+async function cancelarFolio(folio){
+ const q=await pedirQuien('Cancelar '+folio,'El folio quedará marcado como CANCELADO. No se borra; queda el registro con tu nombre y el motivo.');
+ if(!q) return;
+ const box=document.getElementById('reg-list'); box.style.opacity=.5;
+ try{
+  const r=await fetch(SCRIPT_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},
+   body:JSON.stringify({accion:'cancelar',modulo:actual,folio,quien:q.nombre,motivo:q.motivo})});
+  const j=await r.json(); if(!j.ok) throw new Error(j.error);
+  await abrirRegistros();
+ }catch(e){mostrarError(e.message==='Failed to fetch'?'Sin conexión. Intenta de nuevo.':e.message);}
+ finally{box.style.opacity=1;}
+}
+function corregir(folio){
+ const x=REGS.find(r=>r.folio===folio); if(!x) return;
+ cerrar('m-reg');
+ const sc=scr(); nuevoSilencioso(sc);
+ sc.querySelectorAll('[data-k]').forEach(e=>{
+  const v=x.enc[e.dataset.k]; if(v===undefined) return;
+  if(e.classList.contains('seg')) e.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.textContent===v));
+  else e.value=v;
+ });
+ const filas=sc.querySelectorAll('.fila');
+ x.placas.forEach((p,i)=>{
+  const f=filas[i]; if(!f) return;
+  f.querySelector('.code').value=p.code; resolver(f);
+  f.querySelector('.qty').value=p.qty;
+  const ex=f.querySelector('.motivo,.ubic'); if(ex) ex.value=p.extra||'';
+ });
+ contar(sc);
+ sc.dataset.corrige=folio;
+ const b=sc.querySelector('.banner-corr');
+ b.innerHTML=`<span>✏️ Corrigiendo ${folio}. Ajusta y toca Guardar.</span><button onclick="salirCorreccion(scr(),true)">Salir</button>`;
+ b.classList.add('on');
+ sc.querySelector('.guardar').textContent='Guardar corrección';
+ scrollTo(0,0);
+}
+function salirCorreccion(sc,limpiar){
+ if(!sc) return;
+ delete sc.dataset.corrige;
+ const b=sc.querySelector('.banner-corr'); if(b){b.classList.remove('on');b.innerHTML='';}
+ const g=sc.querySelector('.guardar'); if(g) g.textContent='Guardar registro';
+ if(limpiar) nuevoSilencioso(sc);
+}
+function nuevoSilencioso(sc){
+ sc.querySelectorAll('input,textarea').forEach(e=>{e.value='';e.classList.remove('invalido');});
+ sc.querySelectorAll('.seg button').forEach(b=>b.classList.remove('active'));
+ sc.querySelectorAll('.invalido').forEach(e=>e.classList.remove('invalido'));
+ const ec=sc.querySelector('.scan-err'); if(ec){ec.textContent='';ec.style.display='none';}
+ delete sc.dataset.avisado; initFilas(sc);
+}
+
 function nuevo(){
- cerrar('m-ok'); const s=scr();
+ cerrar('m-ok'); const s=scr(); salirCorreccion(s);
  s.querySelectorAll('input,textarea').forEach(e=>e.value=''); s.querySelectorAll('select').forEach(e=>e.value='');
  s.querySelectorAll('.seg button').forEach(b=>b.classList.remove('active'));
  err(''); delete s.dataset.avisado; initFilas(s); scrollTo(0,0);
