@@ -23,7 +23,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .menu-card{background:#fff;border-radius:8px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid var(--borde);cursor:pointer;text-align:left;font-family:inherit;width:100%}
 .menu-card:active{transform:scale(.98)}
 .icon-box{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.icon-box.blue{background:var(--claro)}.icon-box.green{background:#e8f5e9}.icon-box.orange{background:#fff3e0}.icon-box.red{background:#ffebee}.icon-box.purple{background:#f3e5f5}
+.icon-box.blue{background:var(--claro)}.icon-box.green{background:#e8f5e9}.icon-box.orange{background:#fff3e0}.icon-box.red{background:#ffebee}.icon-box.purple{background:#f3e5f5}.icon-box.teal{background:#e0f2f1}
 .menu-card .text{flex:1}.menu-card h3{color:var(--marino);font-size:15px;font-weight:700;margin-bottom:2px}
 .menu-card p{color:var(--gris);font-size:12px}.menu-card .arrow{color:#bdbdbd;font-size:22px}
 .screen{display:none}.screen.active{display:block}
@@ -81,7 +81,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .fila input:focus{outline:none;border-color:var(--marino);box-shadow:0 0 0 3px rgba(26,35,126,.12)}
 .fila input.code{font-weight:700;color:var(--marino)}
 .fila input.qty{text-align:center;font-weight:700}
-.fila input.ubic.invalido,.fila input.invalido{border-color:var(--rojo);background:#ffebee}
+.fila input.ubic.invalido,.fila .descr.invalido,.fila input.invalido{border-color:var(--rojo);background:#ffebee}
 .fila .cam{height:42px;background:var(--marino);color:#fff;border:none;border-radius:8px;font-size:18px;cursor:pointer}
 .fila .des{color:var(--gris);font-size:11px;line-height:1.35;margin:6px 0 0 34px}
 .fila input.ubic{margin-top:8px;font-size:13px;padding:9px 10px;width:calc(100% - 34px);margin-left:34px}
@@ -122,10 +122,33 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .sug button b{color:var(--marino);font-size:14px;display:block}
 .sug button:active,.sug button:hover{background:var(--claro)}
 .fila .des.prev{color:var(--azul);font-style:italic}
+.fila-top{grid-template-columns:26px 1fr 42px 42px!important}
+.fila-bot{display:grid;grid-template-columns:110px;gap:8px;margin:8px 0 0 34px}
+.fila-bot.con-ext{grid-template-columns:110px 1fr}
+.fila-bot input{width:100%;min-width:0}
+.fila .fila-bot input.ext{margin:0;width:100%;font-size:14px;padding:11px 10px}
+@media (max-width:400px){body{padding:10px}.body{padding:12px}.fila{padding:8px}}
+.fila .bus{height:42px;background:#fff;color:var(--marino);border:1px solid var(--borde);border-radius:8px;font-size:17px;cursor:pointer;padding:0}
+.fila .cam{padding:0}
+.fila .descr{display:block;resize:none;line-height:1.35;font-family:inherit;border:1px solid var(--borde);border-radius:8px;margin-top:8px;width:calc(100% - 34px);margin-left:34px;font-size:12px;padding:9px 10px;background:#f7f8fc;color:#424242;font-weight:500}
+.fila .descr[readonly]{border-color:transparent}
+.fila .descr.prev{color:var(--azul);font-style:italic}
+.fila.fuera{border-color:#ffb74d;background:#fffaf2}
+.fila.fuera .n{background:#fff3e0;color:#ef6c00}
+.fila.fuera .descr{background:#fff;border-color:#ffb74d}
+.fila .msg.aviso{color:#b45309}
+.bus-c{max-width:480px}
+.bus-q{width:100%;padding:12px 14px;border:1px solid var(--borde);border-radius:8px;font-size:16px;font-family:inherit;margin-top:6px}
+.bus-q:focus{outline:none;border-color:var(--marino)}
+.bus-n{color:var(--gris);font-size:12px;margin:8px 0}
+.bus-list{max-height:55vh;overflow:auto;border:1px solid var(--borde);border-radius:8px}
+.bus-list button{display:block;width:100%;text-align:left;background:#fff;border:none;border-bottom:1px solid #f0f0f0;padding:10px 12px;font-family:inherit;cursor:pointer;font-size:11px;color:#616161;line-height:1.35}
+.bus-list button b{color:var(--marino);font-size:15px;display:block}
+.bus-list button:active{background:var(--claro)}
 .btn-primary{background:var(--marino);color:#fff;font-weight:700;padding:16px 24px;border-radius:12px;border:none;cursor:pointer;width:100%;font-size:16px;font-family:inherit;box-shadow:0 4px 12px rgba(26,35,126,.3);margin-top:18px}
 .btn-primary:active{transform:scale(.98);background:#0d1742}
 .btn-secondary{background:#fff;color:var(--marino);font-weight:600;padding:14px;border-radius:8px;border:1px solid var(--borde);cursor:pointer;width:100%;font-size:15px;font-family:inherit;margin-top:10px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
 .modal.show{display:flex}
 .modal-c{background:#fff;border-radius:16px;padding:22px;max-width:420px;width:100%;max-height:85vh;overflow:auto}
 .modal-c h3{color:var(--marino);font-size:17px;margin-bottom:6px}
@@ -143,7 +166,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 .cam-c{max-width:460px}
 .err-c h3{color:var(--rojo)}
 .err-box{background:#ffebee;color:#c62828;border-radius:8px;padding:10px 12px;font-size:14px;font-weight:600;margin:10px 0}
-.carga{position:fixed;inset:0;background:rgba(255,255,255,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:20;font-weight:600;color:var(--marino);padding:20px;text-align:center}
+.carga{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(255,255,255,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:20;font-weight:600;color:var(--marino);padding:20px;text-align:center}
 .carga.oculto{display:none}
 .spin{width:36px;height:36px;border:4px solid var(--claro);border-top-color:var(--azul);border-radius:50%;animation:g 0.9s linear infinite}
 @keyframes g{to{transform:rotate(360deg)}}
@@ -165,13 +188,14 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
   <div class="content-white">
    <div class="menu-grid">
     <button class="menu-card" onclick="abrir('entrega')"><div class="icon-box blue">📦</div><div class="text"><h3>Entrega de placas</h3><p>Surtido a OF / OPI</p></div><span class="arrow">›</span></button>
+    <button class="menu-card" onclick="abrir('fabricacion')"><div class="icon-box teal">🛠️</div><div class="text"><h3>Fabricación</h3><p>Placas fabricadas por OF</p></div><span class="arrow">›</span></button>
     <button class="menu-card" onclick="abrir('traslado')"><div class="icon-box orange">🔄</div><div class="text"><h3>Traslados</h3><p>Por solicitud de traslado</p></div><span class="arrow">›</span></button>
     <button class="menu-card" onclick="abrir('recibo')"><div class="icon-box green">🚚</div><div class="text"><h3>Recibo de proveedor</h3><p>Entrada de placas</p></div><span class="arrow">›</span></button>
     <button class="menu-card" onclick="abrir('rechazo')"><div class="icon-box red">⛔</div><div class="text"><h3>Rechazo de calidad</h3><p>Placas rechazadas al proveedor</p></div><span class="arrow">›</span></button>
     <button class="menu-card" onclick="abrir('inventario')"><div class="icon-box purple">📋</div><div class="text"><h3>Inventario</h3><p>Conteo de placas por ubicación</p></div><span class="arrow">›</span></button>
    </div>
   </div>
- <div class="pie">Área de Placas · v2.1</div>
+ <div class="pie">Área de Placas · v3.0</div>
  </div>
 
  <!-- ENTREGA -->
@@ -192,6 +216,20 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
    <div class="input-group"><label>Quién recibe <span class="req">*</span></label><input data-req data-k="Quién recibe" placeholder="Nombre de quien recibe" autocapitalize="words"></div>
    <div class="input-group"><label>Surtido <span class="req">*</span></label><div class="seg" data-req data-k="Surtido"><button type="button">Completo</button><button type="button">Parcial</button></div></div>
    <div class="input-group"><label>Comentarios</label><textarea data-k="Comentarios" placeholder="Opcional"></textarea></div>
+   PLACAS
+  </div>
+ </div></div>
+
+ <!-- FABRICACIÓN -->
+ <div class="screen" id="fabricacion"><div class="mod">
+  <div class="header-inner"><button class="btn-back" onclick="inicio()">‹</button><h1>🛠️ Fabricación</h1><button class="btn-reg" onclick="abrirRegistros()" title="Registros recientes">📋 Registros</button></div>
+  <div class="body">
+   <div class="banner-corr"></div>
+   <div class="section-t">Datos de fabricación</div>
+   <div class="input-group"><label>Fecha</label><div class="fecha-auto"><b class="reloj"></b><span>Se registra al guardar</span></div></div>
+   <div class="input-group"><label>Quién fabrica <span class="req">*</span></label><input data-req data-k="Quién fabrica" placeholder="Nombre de quien fabrica" autocapitalize="words"></div>
+   <div class="input-group"><label>Comentarios</label><textarea data-k="Comentarios" placeholder="Opcional"></textarea></div>
+   <div class="nota-campo">Cada placa lleva su propia OF.</div>
    PLACAS
   </div>
  </div></div>
@@ -256,6 +294,14 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
  </div></div>
 </div>
 
+<div class="modal" id="m-bus"><div class="modal-c bus-c">
+ <h3>🔍 Buscar placa</h3>
+ <input id="bus-q" class="bus-q" placeholder="Código o modelo, ej. 981B 200" autocomplete="off" oninput="pintarBuscar(this.value)">
+ <div class="bus-n" id="bus-n"></div>
+ <div class="bus-list" id="bus-list"></div>
+ <button class="btn-secondary" onclick="cerrar('m-bus')">Cerrar</button>
+</div></div>
+
 <div class="modal" id="m-cam"><div class="modal-c cam-c">
  <h3>📷 Escanear placa</h3>
  <p>Apunta la cámara al código QR de la placa.</p>
@@ -303,9 +349,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI'
 <script>
 // ⬇️ Pega aquí la URL de tu implementación de Apps Script (termina en /exec)
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyew3ouHOCxRTppjVXwvJVTmd2dmg9zERbHO3bX1nU3WxSEs8QY2DTXh3CfOPPRXh645Q/exec';
-let CAT = {};
+let CAT = {}, INACT = {};
 const MAX = 10;
-const PREF = {entrega:'ENT',traslado:'TRA',recibo:'REC',rechazo:'RCH',inventario:'INV'};
+const PREF = {entrega:'ENT',traslado:'TRA',recibo:'REC',rechazo:'RCH',inventario:'INV',fabricacion:'FAB'};
 const PLACAS_HTML = `
  <div class="section-t">Placas <span class="contador">0 de 10</span></div>
  <div class="col-h"><span>#</span><span>Placa (escanear)</span><span></span><span>Cantidad</span></div>
@@ -329,69 +375,94 @@ function inicio(){if(actual)salirCorreccion(scr(),true);actual=null;document.que
 function cerrar(id){document.getElementById(id).classList.remove('show');}
 
 function err(msg){const e=scr().querySelector('.scan-err');e.className='scan-err';e.textContent=msg;e.style.display=msg?'block':'none';}
-let camFila=null;
+let camFila=null, buscarFila=null;
+function extraTipo(id){return id==='rechazo'?'motivo':id==='inventario'?'ubic':id==='fabricacion'?'ofp':'';}
 function filasHTML(tipo){return Array.from({length:MAX},(_,i)=>`
  <div class="fila" data-i="${i}">
   <div class="fila-top">
    <div class="n">${i+1}</div>
    <input class="code" placeholder="Código o modelo" autocomplete="off" enterkeyhint="next">
+   <button class="bus" type="button" title="Buscar en catálogo">🔍</button>
    <button class="cam" type="button" title="Escanear con cámara">📷</button>
-   <input class="qty" type="number" min="1" inputmode="numeric" placeholder="0" enterkeyhint="next">
   </div>
   <div class="sug"></div>
-  <div class="des" style="display:none"></div><div class="msg" style="display:none"></div>
- ${tipo==='motivo'?`<input class="motivo" placeholder="Motivo de la placa ${i+1} (opcional)" autocomplete="off">`:''}${tipo==='ubic'?`<input class="ubic" placeholder="Ubicación de la placa ${i+1}" autocomplete="off">`:''}
+  <textarea class="descr" rows="2" placeholder="Descripción" readonly tabindex="-1"></textarea>
+  <div class="msg" style="display:none"></div>
+  <div class="fila-bot${tipo?' con-ext':''}">
+   <input class="qty" type="number" min="1" inputmode="numeric" placeholder="Cantidad" enterkeyhint="next">
+   ${tipo==='motivo'?`<input class="ext motivo" placeholder="Motivo (opcional)" autocomplete="off">`:''}${tipo==='ubic'?`<input class="ext ubic" placeholder="Ubicación" autocomplete="off">`:''}${tipo==='ofp'?`<input class="ext ofp" placeholder="OF" inputmode="numeric" autocomplete="off">`:''}
+  </div>
  </div>`).join('');}
 function initFilas(sc){
- const box=sc.querySelector('.filas'); box.innerHTML=filasHTML(sc.id==='rechazo'?'motivo':sc.id==='inventario'?'ubic':'');
+ const box=sc.querySelector('.filas'); box.innerHTML=filasHTML(extraTipo(sc.id));
  box.querySelectorAll('.fila').forEach(f=>{
-  const c=f.querySelector('.code'), q=f.querySelector('.qty'), i=+f.dataset.i;
+  const c=f.querySelector('.code'), q=f.querySelector('.qty'), d=f.querySelector('.descr'), x=f.querySelector('.ext'), i=+f.dataset.i;
+  const sig=()=>{const n=box.querySelector(`.fila[data-i="${i+1}"] .code`);if(n)n.focus();else if(document.activeElement)document.activeElement.blur();};
   c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();
     const sg=f.querySelector('.sug'), t=c.value.trim().split(/\s+/)[0];
     if(sg.classList.contains('on')&&!CAT[t]){const b=sg.querySelector('button');if(b){elegir(f,b.dataset.c);return;}}
-    ocultarSug(f);resolver(f);if(f.classList.contains('ok'))q.focus();}});
+    ocultarSug(f);resolver(f);
+    if(f.classList.contains('ok'))q.focus();else if(f.classList.contains('fuera'))d.focus();}});
   c.addEventListener('blur',()=>{ocultarSug(f);resolver(f);});
-  c.addEventListener('input',()=>{f.classList.remove('ok','mal');f.querySelector('.des').style.display='none';f.querySelector('.msg').style.display='none';c.classList.remove('invalido');contar(sc);});
-  c.addEventListener('input',()=>sugerir(f));
+  c.addEventListener('input',()=>{f.classList.remove('ok','mal','fuera');d.value='';d.style.height='';d.readOnly=true;d.classList.remove('prev','invalido');
+    const m=f.querySelector('.msg');m.style.display='none';c.classList.remove('invalido');sugerir(f);contar(sc);});
+  d.addEventListener('input',()=>{d.classList.remove('invalido');ajustar(d);contar(sc);});
+  d.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();q.focus();}});
   q.addEventListener('input',()=>{q.classList.remove('invalido');contar(sc);});
-  const u=f.querySelector('.ubic'); const sig=()=>{const n=box.querySelector(`.fila[data-i="${i+1}"] .code`);n?n.focus():document.activeElement.blur();};
-  q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();u?u.focus():sig();}});
-  if(u){u.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sig();}});u.addEventListener('input',()=>u.classList.remove('invalido'));}
+  q.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(x)x.focus();else sig();}});
+  if(x){x.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sig();}});x.addEventListener('input',()=>x.classList.remove('invalido'));}
   f.querySelector('.cam').onclick=()=>abrirCamara(f);
+  f.querySelector('.bus').onclick=()=>abrirBuscar(f);
  });
  contar(sc);
 }
 let lector=null;
 function abrirCamara(f){
  camFila=f; document.getElementById('m-cam').classList.add('show');
- lector=new Html5Qrcode('reader');
+ try{lector=new Html5Qrcode('reader');}catch(e){cerrarCamara();mostrarError('La cámara no está disponible en este celular. Usa 🔍 para buscar la placa o escribe el código.');return;}
  lector.start({facingMode:'environment'},{fps:10,qrbox:{width:230,height:230}},
   txt=>{cerrarCamara(); const c=camFila.querySelector('.code'); c.value=txt; resolver(camFila);
         if(camFila.classList.contains('ok')) camFila.querySelector('.qty').focus();},
   ()=>{}).catch(e=>{
    cerrarCamara();
    let m='No se pudo abrir la cámara. ';
-   if(e&&String(e).includes('NotAllowed')) m+='Permite el acceso a la cámara en la configuración del navegador y recarga la página.';
-   else m+='Puedes escribir el código o usar la pistola lectora.';
+   if(e&&String(e).indexOf('NotAllowed')>=0) m+='Permite el acceso a la cámara en la configuración del navegador y recarga la página.';
+   else m+='Usa 🔍 para buscar la placa, escribe el código o usa la pistola lectora.';
    mostrarError(m);
   });
 }
 function cerrarCamara(){
  document.getElementById('m-cam').classList.remove('show');
- if(lector){const l=lector; lector=null; l.stop().catch(()=>{}).finally(()=>{try{l.clear();}catch(_){}});}
+ if(lector){const l=lector; lector=null; l.stop().catch(()=>{}).then(()=>{try{l.clear();}catch(_){}});}
+}
+/* --- Búsqueda en catálogo (lista desplegable) --- */
+function abrirBuscar(f){
+ buscarFila=f; const inp=document.getElementById('bus-q'); inp.value='';
+ pintarBuscar(''); document.getElementById('m-bus').classList.add('show');
+ setTimeout(()=>inp.focus(),80);
+}
+function filtrarCat(v){
+ v=v.trim().toUpperCase();
+ const ks=Object.keys(CAT);
+ if(!v) return ks;
+ const tk=v.split(/\s+/);
+ return ks.filter(k=>{const t=(k+' '+CAT[k]).toUpperCase();return tk.every(x=>t.indexOf(x)>=0);});
+}
+function pintarBuscar(v){
+ const res=filtrarCat(v), box=document.getElementById('bus-list');
+ document.getElementById('bus-n').textContent=res.length+' placa(s)'+(res.length>80?' · mostrando 80, escribe más para filtrar':'');
+ box.innerHTML=res.slice(0,80).map(k=>`<button type="button" data-c="${k}"><b>${k}</b>${esc(CAT[k])}</button>`).join('')||'<div class="empty-state">Sin coincidencias. Puedes escribir el código directo en el renglón.</div>';
+ box.querySelectorAll('button').forEach(b=>b.onclick=()=>{cerrar('m-bus');elegir(buscarFila,b.dataset.c);});
 }
 function ocultarSug(f){const sg=f.querySelector('.sug');sg.classList.remove('on');sg.innerHTML='';}
 function elegir(f,code){const c=f.querySelector('.code');c.value=code;ocultarSug(f);resolver(f);if(f.classList.contains('ok'))f.querySelector('.qty').focus();}
 function sugerir(f){
- const c=f.querySelector('.code'), d=f.querySelector('.des'), sg=f.querySelector('.sug');
+ const c=f.querySelector('.code'), d=f.querySelector('.descr'), sg=f.querySelector('.sug');
  const v=c.value.trim();
- d.classList.remove('prev');
- if(!v||/\s/.test(c.value.replace(/^\s+/,''))&&/^\d{6}\s/.test(v)){ocultarSug(f);return;}   // lectura de QR/pistola: no sugerir
- if(/^\d{6}$/.test(v)&&CAT[v]){ocultarSug(f);d.textContent=CAT[v];d.classList.add('prev');d.style.display='block';return;}
+ if(!v||/^\d{6,}\s/.test(v)){ocultarSug(f);return;}   // lectura de QR/pistola: no sugerir
+ if(/^\d+$/.test(v)&&CAT[v]&&v.length>=6){ocultarSug(f);d.value=CAT[v];d.classList.add('prev');ajustar(d);return;}
  if(v.length<2){ocultarSug(f);return;}
- let res;
- if(/^\d+$/.test(v)) res=Object.keys(CAT).filter(k=>k.startsWith(v));
- else{const tk=v.toUpperCase().split(/\s+/);res=Object.keys(CAT).filter(k=>{const t=(k+' '+CAT[k]).toUpperCase();return tk.every(x=>t.includes(x));});}
+ let res=/^\d+$/.test(v)?Object.keys(CAT).filter(k=>k.indexOf(v)===0):filtrarCat(v);
  res=res.slice(0,8);
  if(!res.length){ocultarSug(f);return;}
  sg.innerHTML=res.map(k=>`<button type="button" data-c="${k}"><b>${k}</b>${esc(CAT[k])}</button>`).join('');
@@ -399,19 +470,28 @@ function sugerir(f){
  sg.classList.add('on');
 }
 function resolver(f){
- const c=f.querySelector('.code'), d=f.querySelector('.des'), m=f.querySelector('.msg'), sc=f.closest('.screen');
+ const c=f.querySelector('.code'), d=f.querySelector('.descr'), m=f.querySelector('.msg'), sc=f.closest('.screen');
  const code=c.value.trim().split(/\s+/)[0]||'';
- f.classList.remove('ok','mal'); d.style.display=m.style.display='none'; c.classList.remove('invalido');
- if(!code){contar(sc);return;}
- c.value=code;
- const msg=t=>{f.classList.add('mal');c.classList.add('invalido');m.textContent=t;m.style.display='block';contar(sc);};
- if(!CAT[code]) return msg(`${code} no está en el catálogo de placas.`);
- const dup=sc.id==='inventario'?null:[...sc.querySelectorAll('.fila')].find(o=>o!==f&&o.querySelector('.code').value.trim()===code);
- if(dup) return msg(`${code} ya está en la placa ${+dup.dataset.i+1}. Suma la cantidad ahí.`);
- f.classList.add('ok'); d.classList.remove('prev'); d.textContent=CAT[code]; d.style.display='block'; contar(sc);
+ const eraFuera=f.classList.contains('fuera')&&f.dataset.code===code, descPrev=d.value;
+ f.classList.remove('ok','mal','fuera'); m.style.display='none'; m.className='msg'; c.classList.remove('invalido'); d.classList.remove('prev');
+ if(!code){d.value='';d.readOnly=true;d.style.height='';contar(sc);return;}
+ c.value=code; f.dataset.code=code;
+ const dupPermitido=sc.id==='inventario'||sc.id==='fabricacion';
+ const dup=dupPermitido?null:[].slice.call(sc.querySelectorAll('.fila')).find(o=>o!==f&&o.querySelector('.code').value.trim()===code);
+ if(dup){f.classList.add('mal');c.classList.add('invalido');m.textContent=`${code} ya está en la placa ${+dup.dataset.i+1}. Suma la cantidad ahí.`;m.style.display='block';contar(sc);return;}
+ if(CAT[code]){f.classList.add('ok');d.value=CAT[code];d.readOnly=true;d.tabIndex=-1;ajustar(d);contar(sc);return;}
+ f.classList.add('fuera'); d.readOnly=false; d.tabIndex=0;
+ if(eraFuera) d.value=descPrev; else d.value=INACT[code]||'';
+ m.className='msg aviso';
+ m.textContent=INACT[code]?'Código INACTIVO en SAP. Verifica antes de guardar; quedará marcado para revisión.'
+                          :'No está en el catálogo. Escribe la descripción; se guardará marcado para revisión.';
+ m.style.display='block';
+ ajustar(d); contar(sc);
 }
+function ajustar(d){d.style.height='auto';d.style.height=(d.scrollHeight+2)+'px';}
+function filaValida(f){return f.classList.contains('ok')||(f.classList.contains('fuera')&&f.querySelector('.descr').value.trim()!=='');}
 function contar(sc){
- const ok=[...sc.querySelectorAll('.fila.ok')];
+ const ok=[].slice.call(sc.querySelectorAll('.fila')).filter(filaValida);
  sc.querySelector('.contador').textContent=`${ok.length} de ${MAX}`;
  sc.querySelector('.tot').textContent=ok.reduce((a,f)=>a+(+f.querySelector('.qty').value||0),0);
 }
@@ -427,13 +507,18 @@ document.querySelectorAll('.guardar').forEach(b=>b.onclick=()=>{
  if(uno.length&&!uno.some(e=>e.value.trim())){uno.forEach(e=>e.classList.add('invalido'));sc.querySelector('.nota-campo').classList.add('invalido');marca(uno[0]);}
  const items=[];
  sc.querySelectorAll('.fila').forEach(f=>{
-  const c=f.querySelector('.code'), q=f.querySelector('.qty'), tiene=c.value.trim(), cant=q.value.trim();
+  const c=f.querySelector('.code'), q=f.querySelector('.qty'), d=f.querySelector('.descr'), x=f.querySelector('.ext');
+  const tiene=c.value.trim(), cant=q.value.trim();
   if(!tiene&&!cant) return;
   if(!tiene){c.classList.add('invalido');marca(c);return;}
-  if(!f.classList.contains('ok')){marca(c);return;}
+  if(!f.classList.contains('ok')&&!f.classList.contains('fuera')&&!f.classList.contains('mal')) resolver(f);
+  if(f.classList.contains('mal')){marca(c);return;}
+  const fuera=f.classList.contains('fuera');
+  if(fuera&&!d.value.trim()){d.classList.add('invalido');marca(d);return;}
   if(!(+cant>0)){q.classList.add('invalido');marca(q);return;}
-  const ub=f.querySelector('.ubic'); if(ub&&!ub.value.trim()){ub.classList.add('invalido');marca(ub);return;}
-  const mo=f.querySelector('.motivo'); items.push({code:c.value.trim(),qty:+cant,mot:mo?mo.value.trim():(ub?ub.value.trim():'')});
+  if(x&&(x.classList.contains('ubic')||x.classList.contains('ofp'))&&!x.value.trim()){x.classList.add('invalido');marca(x);return;}
+  if(x&&x.classList.contains('ofp')&&!/^\d+$/.test(x.value.trim())){x.classList.add('invalido');marca(x);err('La OF debe llevar solo números.');return;}
+  items.push({code:c.value.trim(),qty:+cant,mot:x?x.value.trim():'',desc:fuera?d.value.trim():'',fuera:fuera});
  });
  if(ok&&actual==='inventario'){const vis={},rep=[];items.forEach(p=>{const key=p.code+'|'+p.mot.toUpperCase();if(vis[key])rep.push(`${p.code} en ${p.mot}`);vis[key]=1;});
   const firma=rep.join(',');
@@ -453,7 +538,7 @@ async function enviar(sc,btn,items){
  sc.querySelectorAll('[data-k]').forEach(e=>{
   encabezado[e.dataset.k]=e.classList.contains('seg')?((e.querySelector('.active')||{}).textContent||''):e.value.trim();
  });
- const placas=items.map(p=>({code:p.code,qty:p.qty,extra:p.mot}));
+ const placas=items.map(p=>({code:p.code,qty:p.qty,extra:p.mot,desc:p.desc}));
  btn.disabled=true; const txt=btn.textContent; btn.textContent='Guardando…';
  try{
   const r=await fetch(SCRIPT_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -462,9 +547,10 @@ async function enviar(sc,btn,items){
   if(!j.ok) throw new Error(j.error||'Error desconocido.');
   document.getElementById('ok-folio').textContent=j.folio;
   document.getElementById('ok-reemp').textContent=j.reemplaza?`Reemplaza a ${j.reemplaza}, que quedó cancelado.`:'';
-  document.getElementById('ok-res').innerHTML=items.map(p=>`<div><span>${p.code}${p.mot?` · <i style="color:#757575">${esc(p.mot)}</i>`:''}</span><b>${p.qty}</b></div>`).join('')+
+  document.getElementById('ok-res').innerHTML=items.map(p=>`<div><span>${p.code}${p.fuera?' <i style="color:#ef6c00">(fuera de catálogo)</i>':''}${p.mot?` · <i style="color:#757575">${actual==='fabricacion'?'OF ':''}${esc(p.mot)}</i>`:''}</span><b>${p.qty}</b></div>`).join('')+
    `<div style="border-top:1px solid #e0e0e0;margin-top:4px;padding-top:4px"><span>${items.length} placa(s)</span><b>${items.reduce((a,p)=>a+p.qty,0)} pzas</b></div>`+
-   (j.alertas?`<div style="color:#856404;font-weight:600">⚠️ ${j.alertas} renglón(es) con alerta de posible duplicado</div>`:'');
+   (j.alertas?`<div style="color:#856404;font-weight:600">⚠️ ${j.alertas} renglón(es) con alerta de posible duplicado</div>`:'')+
+   (j.fueraCatalogo?`<div style="color:#856404;font-weight:600">⚠️ ${j.fueraCatalogo} placa(s) fuera de catálogo quedaron marcadas para revisión</div>`:'');
   document.getElementById('m-ok').classList.add('show');
  }catch(e){
   mostrarError(e.message==='Failed to fetch'?'Sin conexión con la base de datos. Revisa tu internet e intenta de nuevo.':e.message);
@@ -479,7 +565,7 @@ async function cargarCatalogo(){
   const r=await fetch(SCRIPT_URL+'?accion=catalogo',{redirect:'follow'});
   const j=await r.json();
   if(!j.ok) throw new Error(j.error||'');
-  CAT=j.catalogo||{};
+  CAT=j.catalogo||{}; INACT=j.inactivos||{};
   if(!Object.keys(CAT).length) throw new Error('El catálogo está vacío.');
   c.classList.add('oculto');
  }catch(e){
@@ -491,7 +577,7 @@ cargarCatalogo();
 
 /* ---------- Registros recientes, corregir y cancelar ---------- */
 let REGS=[], filtroReg='hoy';
-const TIT={entrega:'Entregas',traslado:'Traslados',recibo:'Recibos',rechazo:'Rechazos',inventario:'Inventario'};
+const TIT={entrega:'Entregas',traslado:'Traslados',recibo:'Recibos',rechazo:'Rechazos',inventario:'Inventario',fabricacion:'Fabricaciones'};
 document.querySelectorAll('#m-reg .chips button').forEach(b=>b.onclick=()=>{
  document.querySelectorAll('#m-reg .chips button').forEach(x=>x.classList.remove('on'));b.classList.add('on');filtroReg=b.dataset.f;pintarRegs();});
 async function abrirRegistros(){
@@ -512,7 +598,7 @@ function pintarRegs(){
  box.innerHTML=l.map((x,i)=>{
   const can=x.estatus==='CANCELADO';
   const enc=Object.entries(x.enc).filter(([k,v])=>v!=='').map(([k,v])=>`<b>${esc(k)}:</b> ${esc(v)}`).join(' · ');
-  const pl=x.placas.map(p=>`<div><span>${p.code}${p.extra?` <i>· ${esc(p.extra)}</i>`:''}</span><b>${p.qty}</b></div>`).join('');
+  const pl=x.placas.map(p=>`<div><span>${p.code}${p.flag?` <i style="color:#ef6c00">· ${esc(p.flag)}</i>`:''}${p.extra?` <i>· ${actual==='fabricacion'?'OF ':''}${esc(p.extra)}</i>`:''}</span><b>${p.qty}</b></div>`).join('');
   return `<div class="reg${can?' cancel':''}">
    <div class="reg-top"><span class="reg-folio">${x.folio}</span><span class="badge ${can?'can':'act'}">${can?'Cancelado':'Activo'}</span></div>
    <div class="reg-hora">${x.fecha} · ${x.hora}</div>
@@ -564,8 +650,9 @@ function corregir(folio){
  x.placas.forEach((p,i)=>{
   const f=filas[i]; if(!f) return;
   f.querySelector('.code').value=p.code; resolver(f);
+  if(f.classList.contains('fuera')){const dd=f.querySelector('.descr');dd.value=p.desc||'';ajustar(dd);}
   f.querySelector('.qty').value=p.qty;
-  const ex=f.querySelector('.motivo,.ubic'); if(ex) ex.value=p.extra||'';
+  const ex=f.querySelector('.ext'); if(ex) ex.value=p.extra||'';
  });
  contar(sc);
  sc.dataset.corrige=folio;
